@@ -1,0 +1,14 @@
+<!doctype HTML>
+<title>Google Drive Permission Hunter</title>
+<body>
+<div class="authorization">
+{% if not session.oauth2_auth %}
+    <a href="{{url_for('oauth2callback')}}">authorize</a>
+{% else %}
+    <a href="{{url_for('revoke')}}">revoke</a>
+{% endif %}
+</div>
+<div class="content">
+{% block body %}{% endblock %}
+</div>
+</body>

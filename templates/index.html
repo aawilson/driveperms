@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block body %}
+    {% if not files %}
+        Please <a href="{{url_for('oauth2callback')}}">authorize</a> the app, first.
+    {% else %}
+        <ul>
+        {% for file in files %}
+            <li><ul>
+            <li>Title: {{file["title"]}}</li>
+            <li>Link: <a href="{{file["alternateLink"]}}">{{file["alternateLink"]}}</a></li>
+            <li>Owners:<ul>
+                {% for owner in file["owners"] %}
+                    <li>{{owner["displayName"]}} &lt;{{owner["emailAddress"]}}&gt;</li>
+                {% endfor %}
+                </ul></li>
+            
+            </ul></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}
