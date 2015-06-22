@@ -51,7 +51,7 @@ def oauth2callback():
     flow = client.flow_from_clientsecrets(
         'client_secrets.json',
         scope='https://www.googleapis.com/auth/drive.metadata',
-        redirect_uri='http://localhost:8000/oauth2callback',
+        redirect_uri=url_for('oauth2callback', _external=True),
         )
 
     if not code:
