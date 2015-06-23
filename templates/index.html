@@ -1,7 +1,9 @@
 {% extends 'layout.html' %}
 {% block body %}
-    {% if not files %}
+    {% if files is none %}
         Please <a href="{{url_for('oauth2callback')}}">authorize</a> the app, first.
+    {% elif files|length == 0 %}
+        No documents with shared links! You may rejoice at your leisure.
     {% else %}
         <ul>
         {% for file in files %}
