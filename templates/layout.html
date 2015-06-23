@@ -1,7 +1,7 @@
 <!doctype HTML>
 <title>Google Drive Permission Hunter</title>
 <body>
-<div class="authorization">
+<div class="authorization" style="float:right; margin-right:50px">
 {% if not session.oauth2_auth %}
     <a href="{{url_for('oauth2callback')}}">authorize</a>
 {% else %}

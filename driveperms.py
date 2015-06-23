@@ -11,7 +11,7 @@ from apiclient.discovery import build
 
 
 DEBUG = False
-SECRET_KEY = uuid.uuid4()
+SECRET_KEY = str(uuid.uuid4())
 app = Flask(__name__)
 app.config.from_object(__name__)
 
