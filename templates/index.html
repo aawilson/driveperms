@@ -5,6 +5,7 @@
     {% elif files|length == 0 %}
         No documents with shared links! You may rejoice at your leisure.
     {% else %}
+        Here are documents with shared links ({{num_not_counted}} documents without shareable links not shown):
         <ul>
         {% for file in files %}
             <li>Title: {{file["title"]}}

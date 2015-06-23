@@ -34,15 +34,22 @@ def before_request():
 @app.route('/')
 def index():
     files = None
+    num_not_counted = None
     if 'oauth2_auth' in session:
-        files = [item for item in g.drive_service.files().list().execute()['items'] if item.get('exportLinks', None)]
+        all_files = g.drive_service.files().list().execute()['items']
+        files = [item for item in all_files if item.get('exportLinks', None)]
+        num_not_counted = len(all_files) - len(files)
         #files_pp = simplejson.dumps(
         #    files,
         #    indent=4,
         #    separators=(',', ': '),
         #    )
 
-    return render_template('index.html', files=files)
+    return render_template(
+        'index.html',
+        files=files,
+        num_not_counted=num_not_counted,
+        )
 
 
 @app.route('/oauth2callback')
