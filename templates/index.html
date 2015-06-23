@@ -5,8 +5,8 @@
     {% else %}
         <ul>
         {% for file in files %}
-            <li><ul>
-            <li>Title: {{file["title"]}}</li>
+            <li>Title: {{file["title"]}}
+            <ul>
             <li>Link: <a href="{{file["alternateLink"]}}">{{file["alternateLink"]}}</a></li>
             <li>Owners:<ul>
                 {% for owner in file["owners"] %}
