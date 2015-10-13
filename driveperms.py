@@ -2,15 +2,12 @@ from __future__ import unicode_literals
 import httplib2
 import uuid
 
-import simplejson
-import sqlite3
-
-from flask import Flask, request, session, g, redirect, url_for, render_template, flash
+from flask import Flask, request, session, g, redirect, url_for, render_template
 from oauth2client import client
 from apiclient.discovery import build
 
 
-DEBUG = False
+DEBUG = True
 SECRET_KEY = str(uuid.uuid4())
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -21,7 +18,7 @@ def before_request():
     if 'oauth2_auth' in session:
         creds = client.OAuth2Credentials.from_json(session['oauth2_auth'])
         if creds.access_token_expired:
-            return redirect(flask.url_for('oauth2callback'))
+            return redirect(url_for('oauth2callback'))
         else:
             http_auth = creds.authorize(httplib2.Http())
             g.drive_service = build(
@@ -39,11 +36,6 @@ def index():
         all_files = g.drive_service.files().list().execute()['items']
         files = [item for item in all_files if item.get('exportLinks', None)]
         num_not_counted = len(all_files) - len(files)
-        #files_pp = simplejson.dumps(
-        #    files,
-        #    indent=4,
-        #    separators=(',', ': '),
-        #    )
 
     return render_template(
         'index.html',
@@ -84,5 +76,4 @@ def revoke():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8196)
-
+    app.run(host='0.0.0.0', port=8000)
