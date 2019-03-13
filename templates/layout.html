@@ -1,9 +1,9 @@
 <!doctype HTML>
-<title>Google Drive Permission Hunter</title>
+<title>JIRA Ticket Oauth Junk</title>
 <body>
 <div class="authorization" style="float:right; margin-right:75px">
-{% if not session.oauth2_auth %}
-    <a href="{{url_for('oauth2callback')}}">authorize</a>
+{% if not auth %}
+    <a href="{{url_for('auth')}}">authorize</a>
 {% else %}
     <a href="{{url_for('revoke')}}">revoke</a>
 {% endif %}
